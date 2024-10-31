@@ -39,9 +39,6 @@
 
 /* remove spinners up down arrow */
 
-input[type="number"] {
-    -moz-appearance: textfield; /* Firefox */
-}
 
 input[type="number"]::-webkit-outer-spin-button, 
 input[type="number"]::-webkit-inner-spin-button {
