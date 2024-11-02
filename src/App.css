@@ -1,40 +1,40 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* remove spinners up down arrow */
@@ -56,103 +56,92 @@ input[type="number"]::-webkit-inner-spin-button {
 
 
 .banner {
-  background-image: 
-      linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), /* Dark overlay */
-      url('../public/home-background.jpg'); 
-  background-size: cover; 
-  background-position: center; 
-  height: 100vh;
-  display: flex;
-  /*align-items: center; */
-  justify-content: center; 
-  color: white; 
-  text-align: center;
-}
-
-.banner2 {
-  background-image: 
-      linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), /* Dark overlay */
-      url('../public/home-background.jpg'); 
-  background-size: cover; 
-  background-position: center; 
-  height: 100vh;
+    background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), /* Dark overlay */
+    url('../public/home-background.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; /* Fixes the background in place */
+    min-height: 95.6vh;
 }
 
 .text-background {
-  background-color: rgba(0, 0, 0, 0.5); 
-  border-radius: 10px; 
-  padding: 20px;
-  margin-top: 50px;
+    background-color: rgba(0, 0, 0, 0.5); 
+    border-radius: 10px; 
+    padding: 20px;
+    margin-top: 50px;
 }
 
 .welcome-title {
-  font-size: 3rem; 
-  margin-bottom: 0.5rem; 
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-size: 3rem; 
+    margin-bottom: 0.5rem; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .welcome-subtitle {
-  font-size: 1.5rem; 
-  margin-bottom: 1.5rem; 
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
+    font-size: 1.5rem; 
+    margin-bottom: 1.5rem; 
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
 }
 
 .btn-warning {
-  padding: 0.75rem 1.5rem; 
-  font-size: 1.25rem; 
+    padding: 0.75rem 1.5rem; 
+    font-size: 1.25rem; 
 }
 /* End of Home Page */
 
 /*  -- navbar -- */
 #navbar {
-  background-color: #ad6c1c !important;
+    background-color: #ad6c1c !important;
 }
 
 .nav-link {
-
-  color: white !important;
+    
+    color: white !important;
 }
 
 /* -- end of navbar -- */
 
 /* Loading.js */
 .loading-container {
-  height: 90vh; /* Full viewport height */
+    height: 90vh; /* Full viewport height */
 }
 
 .spinner {
-  animation: spin 2s linear infinite; /* Spin the image continuously */
-  width: 200px; /* Adjust size as needed */
+    animation: spin 2s linear infinite; /* Spin the image continuously */
+    width: 200px; /* Adjust size as needed */
 }
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 
 .EmptyWorkout {
-  width: 300px;
-  height: 300px;
+    width: 300px;
+    height: 300px;
 }
 
 /* styles.css */
 .form-border {
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Soft blue glow */
-  transition: box-shadow 0.3s ease;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Soft blue glow */
+    transition: box-shadow 0.3s ease;
 }
 
 .form-border:hover {
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Increase glow on hover */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Increase glow on hover */
 }
 
 .form-bg {
-  background-color: rgba(57, 35, 8, 0.137);
+    background-color: rgba(57, 35, 8, 0.137);
 } 
+
+

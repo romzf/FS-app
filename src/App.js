@@ -63,7 +63,7 @@ function Content() {
     
     return (
         <>
-            <Container fluid className='banner2'>
+            <Container fluid className='banner'>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/register" element={<Register />} />
