@@ -1,5 +1,5 @@
 // pages/Workouts.js
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback} from 'react';
 import { Navigate } from 'react-router-dom';
 import Loading from '../components/Loading';
 import { Button, Row, Col } from 'react-bootstrap';
@@ -16,7 +16,7 @@ export default function Workouts() {
     
     const token = localStorage.getItem('token');
 
-    const fetchData = () => {
+    const fetchData = useCallback(() => {
         fetch(`${process.env.REACT_APP_API_BASE_URL}/workouts/getMyWorkouts`, {
             method: 'GET',
             headers: {
@@ -33,11 +33,11 @@ export default function Workouts() {
                 console.error('Error fetching workouts:', err);
                 setLoading(false);
             });
-    };
+    }, [token]);
 
     useEffect(() => {
         fetchData();
-    }, []); // Fetch data on mount
+    }, [fetchData]); // Fetch data on mount
 
     if (!token) {
         return <Navigate to="/login" />;
@@ -70,10 +70,10 @@ export default function Workouts() {
                             Add Workout
                         </Button>
                     </div>
-                    <Row className='justify-content-center'>
+                    <Row className="mx-5">
                         {workoutsData.length > 0 ? (
                             workoutsData.map(workout => (
-                                <Col key={workout._id} md={4} className="mb-4 d-flex justify-content-center">
+                                <Col key={workout._id} md={6} lg={4} xxl={3} className="mb-4 d-flex justify-content-center">
                                     <WorkoutCard 
                                         workout={workout}
                                         onComplete={fetchData} 

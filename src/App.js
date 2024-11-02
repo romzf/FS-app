@@ -12,8 +12,6 @@ import Logout from './pages/Logout';
 import Register from './pages/Register';
 import Workouts from './pages/Workouts';
 
-import { useLocation } from 'react-router-dom'; // Import useLocation here
-
 function App() {
     const [user, setUser] = useState({
         id: null,
@@ -62,8 +60,7 @@ function App() {
 
 
 function Content() {
-    const location = useLocation();
-
+    
     return (
         <>
             <Container fluid className='banner2'>
