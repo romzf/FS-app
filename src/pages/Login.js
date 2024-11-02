@@ -4,6 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 import { Notyf } from 'notyf';
 import UserContext from '../UserContext';
+import '../App.css';
 
 export default function Login() {
     const notyf = new Notyf();
@@ -35,11 +36,11 @@ export default function Login() {
                     setEmail('');
                     setPassword('');
                     notyf.success('You are now logged in');
-                } else if (data.message === "No email found") {
+                } else if (data.error === "No Email Found") {
                     notyf.error("No account found with this email");
-                } else if (data.message === "Incorrect email or password") {
+                } else if (data.message === "Email and password do not match") {
                     notyf.error("Incorrect email or password");
-                } else if (data.message === "Invalid email format") {
+                } else if (data.error === false) {
                     notyf.error("Please enter a valid email address");
                 } else {
                     notyf.error("An error occurred. Please try again.");
@@ -61,12 +62,15 @@ export default function Login() {
     }, [email, password]);
 
     return (
-        user.id !== null ? <Navigate to="/" /> :
-            <Form onSubmit={authenticate}>
-                <h1 className="my-5 text-center">Login</h1>
-
+        user.id !== null ? 
+        <Navigate to="/Workouts" />
+        :
+        <div className="container d-flex justify-content-center pt-5" style={{ minHeight: '350px' }}>
+            <Form onSubmit={authenticate} className='form form-border w-100 form-bg' style={{ maxWidth: '400px' }}>
+                <h1 className="my-4 mt-1 text-center text-light">Login</h1>
+    
                 <Form.Group controlId="userEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label className='text-light'>Email address</Form.Label>
                     <Form.Control
                         type="email"
                         placeholder="Enter email"
@@ -75,9 +79,9 @@ export default function Login() {
                         required
                     />
                 </Form.Group>
-
-                <Form.Group controlId="password">
-                    <Form.Label>Password</Form.Label>
+    
+                <Form.Group controlId="password" className='mb-5'>
+                    <Form.Label className='text-light'>Password</Form.Label>
                     <Form.Control
                         type="password"
                         placeholder="Password"
@@ -86,10 +90,12 @@ export default function Login() {
                         required
                     />
                 </Form.Group>
-
+    
                 <Button variant={isActive ? "primary" : "danger"} type="submit" disabled={!isActive}>
                     Submit
                 </Button>
             </Form>
+        </div>
     );
+    
 }

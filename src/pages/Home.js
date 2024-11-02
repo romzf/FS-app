@@ -8,7 +8,7 @@ export default function Home() {
         <Row className="banner"> 
             <Col className="text-center mx-auto">
                 <img 
-                    className="homelogo" 
+                    className="homelogo img-fluid" 
                     src="/logo.png" 
                     alt="Welcome"
                 />

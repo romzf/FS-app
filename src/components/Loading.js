@@ -1,23 +1,24 @@
-// Loading.js
+// src/components/Loading.js
 import React from 'react';
 import '../App.css';
 
-
 const Loading = () => {
-  return (
-    <div className="loading">
-      {/* Replace the path with your actual GIF path */}
-      <h3>Loading, please wait...</h3>
-      <p>
-      <img
-        src="/loading.gif"
-        alt="loding..."
-        width="30"
-        height="30"
-        className="loading-gif" />
-      </p>
-    </div>
-  );
+    return (
+        <div className="loading-container d-flex flex-column justify-content-center align-items-center">
+            <div className="d-flex justify-content-center">
+                <img
+                    src="/Loading.png"
+                    alt="loading..."
+                    className="spinner"
+                />
+            </div>
+            <h3 className="d-flex justify-content-center text-light">
+                Loading, Please Wait.
+            </h3>
+        </div>
+    );
 };
 
 export default Loading;
+
+

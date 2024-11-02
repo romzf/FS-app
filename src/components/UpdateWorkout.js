@@ -46,7 +46,7 @@ export default function UpdateWorkout({ show, handleClose, fetchData, workout })
     };
 
     return (
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose} dialogClassName="modal-dialog-centered">
             <Modal.Header closeButton>
                 <Modal.Title>Update Workout</Modal.Title>
             </Modal.Header>

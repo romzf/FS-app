@@ -1,26 +1,27 @@
 // pages/Workouts.js
 import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import Loading from '../components/Loading';
-import { Card, Button, Row, Col } from 'react-bootstrap';
+import { Button, Row, Col } from 'react-bootstrap';
 import AddWorkout from '../components/AddWorkout';
-import UpdateWorkout from '../components/UpdateWorkout'; // Import the UpdateWorkout component
-import { Notyf } from 'notyf';
+import UpdateWorkout from '../components/UpdateWorkout'; 
+import WorkoutCard from '../components/WorkoutCard';
 
-export default function Products() {
-    
+export default function Workouts() {
     const [loading, setLoading] = useState(true);
     const [workoutsData, setWorkoutsData] = useState([]);
     const [showAddWorkout, setShowAddWorkout] = useState(false);
-    const [showUpdateWorkout, setShowUpdateWorkout] = useState(false); // Manage modal visibility for updating
-    const [currentWorkout, setCurrentWorkout] = useState(null); // State to hold the current workout being updated
-    const notyf = new Notyf();
+    const [showUpdateWorkout, setShowUpdateWorkout] = useState(false);
+    const [currentWorkout, setCurrentWorkout] = useState(null);
+    
+    const token = localStorage.getItem('token');
 
     const fetchData = () => {
         fetch(`${process.env.REACT_APP_API_BASE_URL}/workouts/getMyWorkouts`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
+                'Authorization': `Bearer ${token}`
             }
         })
             .then(res => res.json())
@@ -36,61 +37,19 @@ export default function Products() {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, []); // Fetch data on mount
+
+    if (!token) {
+        return <Navigate to="/login" />;
+    }
 
     const handleShowAdd = () => setShowAddWorkout(true);
     const handleCloseAdd = () => setShowAddWorkout(false);
     const handleShowUpdate = (workout) => {
         setCurrentWorkout(workout);
         setShowUpdateWorkout(true);
-    }; // Show update modal and set current workout
+    };
     const handleCloseUpdate = () => setShowUpdateWorkout(false);
-
-    const completeWorkout = (id) => {
-        fetch(`${process.env.REACT_APP_API_BASE_URL}/workouts/completeWorkoutStatus/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.updatedWorkout) {
-                notyf.success(data.message);
-                fetchData();
-            } else {
-                notyf.error(data.message);
-            }
-        })
-        .catch(err => {
-            console.error('Error completing workout:', err);
-            notyf.error('Error completing workout. Please try again.');
-        });
-    };
-
-    const deleteWorkout = (id) => {
-        fetch(`${process.env.REACT_APP_API_BASE_URL}/workouts/deleteWorkout/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.message) {
-                notyf.success(data.message);
-                fetchData();
-            } else {
-                notyf.error(data.message);
-            }
-        })
-        .catch(err => {
-            console.error('Error deleting workout:', err);
-            notyf.error('Error deleting workout. Please try again.');
-        });
-    };
 
     return (
         <>
@@ -98,12 +57,12 @@ export default function Products() {
                 <Loading />
             ) : (
                 <>
-                    <div className="d-flex justify-content-center mt-3">
-                        <h1>My Workouts</h1>
+                    <div className="d-flex justify-content-center pt-3">
+                        <h1 className='text-light'>My Workouts</h1>
                     </div>
                     <div className="d-flex justify-content-center mb-3">
                         <Button 
-                            id = "addWorkout"
+                            id="addWorkout"
                             variant="success" 
                             className="mb-3" 
                             onClick={handleShowAdd}
@@ -111,45 +70,29 @@ export default function Products() {
                             Add Workout
                         </Button>
                     </div>
-                    <Row>
+                    <Row className='justify-content-center'>
                         {workoutsData.length > 0 ? (
                             workoutsData.map(workout => (
-                                <Col key={workout._id} md={4} className="mb-4">
-                                    <Card className="mt-3 d-flex flex-column" style={{ minHeight: '400px' }}>
-                                        <Card.Body className="flex-grow-1 d-flex flex-column">
-                                            <Card.Title>Name: {workout.name}</Card.Title>
-                                            <Card.Subtitle>Duration: {workout.duration}</Card.Subtitle>
-                                            <Card.Subtitle>Status: {workout.status}</Card.Subtitle>
-                                            <Card.Subtitle>Date Added: {new Date(workout.dateAdded).toLocaleDateString()}</Card.Subtitle>
-                                        </Card.Body>
-                                        <Card.Footer className="d-flex justify-content-around align-items-center">
-                                            <Button 
-                                                variant="success" 
-                                                className="btn btn-primary btn-sm" 
-                                                onClick={() => completeWorkout(workout._id)}
-                                            >
-                                                Complete
-                                            </Button>
-                                            <Button 
-                                                variant="primary" 
-                                                className="btn btn-primary btn-sm" 
-                                                onClick={() => handleShowUpdate(workout)} // Show update modal
-                                            >
-                                                Update
-                                            </Button>
-                                            <Button 
-                                                variant="primary" 
-                                                className="btn btn-danger btn-sm" 
-                                                onClick={() => deleteWorkout(workout._id)}
-                                            >
-                                                Delete
-                                            </Button>
-                                        </Card.Footer>
-                                    </Card>
+                                <Col key={workout._id} md={4} className="mb-4 d-flex justify-content-center">
+                                    <WorkoutCard 
+                                        workout={workout}
+                                        onComplete={fetchData} 
+                                        onDelete={fetchData} 
+                                        onUpdate={() => handleShowUpdate(workout)} 
+                                    />
                                 </Col>
                             ))
                         ) : (
-                            <p>No workouts available.</p>
+                            <div className="d-flex flex-column align-items-center">
+                                <img
+                                    src="/EmptyWorkout.png"
+                                    alt="EmptyWorkout..."
+                                    className="EmptyWorkout img-fluid"
+                                />
+                                <h3 className="d-flex justify-content-center mt-2 text-light">
+                                    Workout list is Empty.
+                                </h3>
+                            </div>
                         )}
                     </Row>
                     <AddWorkout show={showAddWorkout} handleClose={handleCloseAdd} fetchData={fetchData} workoutsData={workoutsData} />

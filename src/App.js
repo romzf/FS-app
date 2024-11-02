@@ -66,28 +66,16 @@ function Content() {
 
     return (
         <>
-            {location.pathname === '/' ? (
-                <Container fluid>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/Workouts" element={<Workouts />} />
-                        <Route path="/logout" element={<Logout />} />
-                        <Route path="*" element={<Error />} />
-                    </Routes>
-                </Container>
-            ) : (
-                <Container>
-                    <Routes>
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/Workouts" element={<Workouts />} />
-                        <Route path="/logout" element={<Logout />} />
-                        <Route path="*" element={<Error />} />
-                    </Routes>
-                </Container>
-            )}
+            <Container fluid className='banner2'>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/Workouts" element={<Workouts />} />
+                    <Route path="/logout" element={<Logout />} />
+                    <Route path="*" element={<Error />} />
+                </Routes>
+            </Container>
         </>
     );
 }
